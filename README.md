@@ -26,6 +26,3 @@ Build production-inspired systems to understand software engineering deeply.
 - Build production-inspired systems.
 - Study how systems fail.
 - Improve systems over time.
-
-
-## An object stays alive as long as at least one reference points to it.
