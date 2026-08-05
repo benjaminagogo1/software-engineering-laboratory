@@ -33,3 +33,54 @@ personal-finance-tracking-system/
 └── README.md
     Project documentation containing the project overview, features, installation
     instructions, usage guide, folder structure, and future improvements.
+
+
+
+
+
+
+
+
+   ###  python3 -m version-2.0
+
+It failed because of two reasons.
+
+Reason 1: Hyphens (-) are not valid in Python module names
+
+Python sees:
+
+version-2.0
+
+as something like:
+
+
+
+
+version - 2.0
+
+Module names must be valid Python identifiers.
+
+For example, these are valid:
+
+version_2_0
+version2
+v2
+
+
+##  Reason 2: -m expects a package
+
+The command
+
+python3 -m package_name
+
+runs a Python package, not just a folder.
+
+A package usually contains an entry point such as:
+
+package_name/
+├── __init__.py
+└── __main__.py
+
+or another importable module structure.
+
+We haven't built your project that way yet.
