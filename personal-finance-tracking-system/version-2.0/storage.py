@@ -6,7 +6,7 @@ from models import Expense
 
 def save_expense(expenses):
     text = json.dumps(
-        [{"name": e.name, "amount": e.amount} for e in expenses], indent= 4
+        [{"name": e.name, "amount": e.amount, "date": e.date} for e in expenses], indent= 4
     )
     try:
         with open("data/expense.json", "w") as save_file:
@@ -29,7 +29,7 @@ def load_expense():
             data = json.loads(content)
             expenses = []
             for item in data:
-                expenses.append(Expense([item["name"], item["amount"]]))
+                expenses.append(Expense(item["name"], item["amount"], item["date"]))
             return expenses
     except FileNotFoundError:
         return []

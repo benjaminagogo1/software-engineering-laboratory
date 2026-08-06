@@ -4,13 +4,14 @@ from models import Expense
 
 def add_expense_menu(tracker):
     name = input("Enter expense name ")
+    date = input("Enter the date: ")
     try:
         amount = int(input("Enter expense amount "))
     except ValueError:
         print("Please, only digits are allowed.")
         return  
 
-    expense = Expense(name, amount)
+    expense = Expense(name, amount, date)
     tracker.add_expense(expense)
     print(f"Expense: '{expense.name}' added successfully!'")
 
@@ -27,7 +28,7 @@ def search_expense_menu(tracker):
     if expense is None:
         print("Expense is not found. ")
     else:
-        print(expense.name, expense.amount)
+        print(expense.name, expense.amount, expense.date)
 
 
 
@@ -39,7 +40,7 @@ def update_expense_menu(tracker):
         return
     else:
         print("Expense found.")
-        print(expense.name, expense.amount)
+        print(expense.name, expense.amount, expense.date)
     try:
         amount = int(input("Enter new amount: "))
     except ValueError:
@@ -58,7 +59,7 @@ def delete_expense_menu(tracker):
         return
     else:
         print("Expense found.")
-        print(expense.name, expense.amount)
+        print(expense.name, expense.amount, expense.date)
     print("Are you sure?  (yes/no)")
     choice = input("Enter your choice. ").lower()
     if choice == "yes":  

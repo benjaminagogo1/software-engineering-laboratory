@@ -6,11 +6,11 @@ import menus
 
 tracker = ExpenseTracker()
    
-def main():
-    tracker.expenses = load_expense()
+# def main():
+    # tracker.expenses = load_expense()
 
 
-main()
+# main()
 running = True
 while running:
     print("\nExpense Tracker")

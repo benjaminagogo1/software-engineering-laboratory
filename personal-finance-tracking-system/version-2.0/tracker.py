@@ -16,7 +16,7 @@ class ExpenseTracker:
             print("No expense saved.")
             return
         for expense in self.expenses:
-            print(expense.name, expense.amount)
+            print(expense.name, expense.amount, expense.date)
 
     def delete_expense(self, expense):
         try:
