@@ -9,7 +9,7 @@ def save_expense(expenses):
         [{"name": e.name, "amount": e.amount} for e in expenses], indent= 4
     )
     try:
-        with open("expense.json", "w") as save_file:
+        with open("data/expense.json", "w") as save_file:
             save_file.write(text)
     except OSError:
         print("Error: Unable to write to the file.")
@@ -21,15 +21,15 @@ def save_expense(expenses):
 
 def load_expense():
     try:
-        with open("expense.json", "r") as read_file:
+        with open("data/expense.json", "r") as read_file:
             content = read_file.read()
             if content.strip() == "":
                 print("No expense saved.")
                 return []
             data = json.loads(content)
             expenses = []
-            for item in expenses:
-                expenses.append(Expense[item["name"], item["amount"]])
+            for item in data:
+                expenses.append(Expense([item["name"], item["amount"]]))
             return expenses
     except FileNotFoundError:
         return []

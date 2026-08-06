@@ -2,7 +2,6 @@ from models import Expense
 
 
 
-
 def add_expense_menu(tracker):
     name = input("Enter expense name ")
     try:
@@ -29,8 +28,6 @@ def search_expense_menu(tracker):
         print("Expense is not found. ")
     else:
         print(expense.name, expense.amount)
-
-
 
 
 

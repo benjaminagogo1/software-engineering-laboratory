@@ -7,7 +7,7 @@ class ExpenseTracker:
 
 
     def add_expense(self, expense):
-        self.expense.append(expense)
+        self.expenses.append(expense)
         save_expense(self.expenses)
 
 

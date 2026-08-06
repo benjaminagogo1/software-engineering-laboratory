@@ -1,7 +1,10 @@
-from storage import save_expense, load_expense
-import tracker
+from storage import load_expense
+from tracker import ExpenseTracker
 import menus
 
+
+
+tracker = ExpenseTracker()
    
 def main():
     tracker.expenses = load_expense()
