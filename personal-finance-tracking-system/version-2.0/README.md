@@ -93,25 +93,25 @@ We haven't built your project that way yet.
 
 The word compile literally means:
 
-Translate code from one language into another language that the computer can execute more efficiently.
+- Translate code from one language into another language that the computer can execute more efficiently.
 
 
 
 
 
 
-Excellent question. The answer is yes and no. Python does check some things during compilation, but not nearly as much as Go.
+- Excellent question. (__The__ answer is yes and __no__.) Python does check some things during compilation, but not nearly as much as Go.
 
-Let's go through your list one by one.
+- Let's go through your list one by one.
 
-Check	Python (Compilation)	Go (Compilation)
-Syntax	✅ Yes	✅ Yes
-Types	❌ No (mostly at runtime)	✅ Yes
-Undefined variables	❌ Usually at runtime	✅ Yes
-Missing imports	⚠️ Imported when execution reaches them	✅ Yes
-Unused variables	❌ No	✅ Yes (compile error)
-Function signatures	❌ Mostly at runtime	✅ Yes
-Package dependencies	⚠️ Imported when needed	✅ Yes
+- Check	Python (Compilation)	Go (Compilation)
+- Syntax	✅ Yes	✅ Yes
+- Types	❌ No (mostly at runtime)	✅ Yes
+- Undefined variables	❌ Usually at runtime	✅ Yes
+- Missing imports	⚠️ Imported when execution reaches them	✅ Yes
+- Unused variables	❌ No	✅ Yes (compile error)
+- Function signatures	❌ Mostly at runtime	✅ Yes
+- Package dependencies	⚠️ Imported when needed	✅ Yes
 
 Let's understand each one.
 
@@ -271,29 +271,29 @@ The professional term
 
 You've just discovered one of the biggest differences between programming languages.
 
-Go
+## Go
 
-Most errors are detected statically.
-
-Meaning:
-
-Before the program runs.
-
-Python
-
-Many errors are detected dynamically.
+- Most errors are detected statically.
 
 Meaning:
 
-While the program is running.
+- Before the program runs.
 
-Benjamin, this distinction—static vs. dynamic checking—is one of the foundational concepts in programming language design. We'll encounter it again when we discuss type systems, compilers, and interpreters in more depth. Understanding it now will make many future topics much easier to grasp.
+## Python
+
+- Many errors are detected dynamically.
+
+Meaning:
+
+- While the program is running.
+
+- Benjamin, this distinction—static vs. dynamic checking—is one of the foundational concepts in programming language design. We'll encounter it again when we discuss type systems, compilers, and interpreters in more depth. Understanding it now will make many future topics much easier to grasp.
 
 If I remembered correctly, u said go discard compiled code, does that mean it compiled everytime?
 
 Yes—but there's an important distinction between go run and go build.
 
-Case 1: go run ✅
+## Case 1: go run ✅
 
 When you type:
 
@@ -315,7 +315,7 @@ So yes, go run compiles every time you run it.
 
 The executable is temporary and is discarded after the program exits.
 
-Case 2: go build ✅
+## Case 2: go build ✅
 
 When you type:
 
@@ -447,19 +447,20 @@ Because compiling does not automatically mean creating bytecode.
 
 Remember our definition:
 
-Compilation is translating one language into another.
+### Compilation is translating one language into another.
 
 The target language depends on the compiler.
 
 For example:
 
-Language	Compiles To
-Python	Bytecode
-Java	Bytecode
-Go	Machine code
-C	Machine code
-Rust	Machine code
-Why did Python choose bytecode?
+## Language	Compiles To
+- Python - Bytecode
+- Java	- Bytecode
+- Go	Machine code
+- C	Machine code
+- Rust	Machine code
+
+## Why did Python choose bytecode?
 
 Imagine Python generated machine code like Go.
 
@@ -467,22 +468,22 @@ Every operating system has a different instruction set and executable format.
 
 You would need a different build for:
 
-Windows
-Linux
-macOS
+- Windows
+- Linux
+- macOS
 
 Instead, Python compiles to a portable bytecode.
 
 As long as a machine has the Python interpreter (specifically the Python Virtual Machine), it can execute the same .py program.
 
-Why did Go avoid bytecode?
+## Why did Go avoid bytecode?
 
 Go's designers wanted:
 
-Maximum execution speed
-Small deployment footprint
-No virtual machine
-Easy distribution
+- Maximum execution speed
+- Small deployment footprint
+- No virtual machine
+- Easy distribution
 
 When you compile a Go program:
 
@@ -500,11 +501,11 @@ The bigger picture
 
 You have now encountered the three major execution models used by modern languages:
 
-1. Interpreted / Bytecode VM
+## 1. Interpreted / Bytecode VM
 ---------------------------------
-Python
-Java (JVM)
-C#
+1. Python
+2. Java (JVM)
+3. C#
 
 Source
    ↓
@@ -515,11 +516,11 @@ Virtual Machine
 CPU
 
 
-2. Ahead-of-Time (AOT) Compilation
+## 2. Ahead-of-Time (AOT) Compilation
 ----------------------------------
-Go
-C
-Rust
+1. Go
+2. C
+3. Rust
 
 Source
    ↓
@@ -530,9 +531,9 @@ CPU
 
 3. Just-In-Time (JIT) Compilation
 ---------------------------------
-Modern Java
-Modern C#
-JavaScript engines (V8)
+1. Modern Java
+2. Modern C#
+3. JavaScript engines (V8)
 
 Source
    ↓
