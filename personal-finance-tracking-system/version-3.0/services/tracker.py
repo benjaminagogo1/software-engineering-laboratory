@@ -1,14 +1,14 @@
 from models.expense import Expense
-from storage.json_storage import save_expense
 
 class ExpenseTracker:
-    def __init__(self):
+    def __init__(self, storage):
         self.expenses = []
+        self.storage = storage
 
 
     def add_expense(self, expense):
         self.expenses.append(expense)
-        save_expense(self.expenses)
+        self.storage.save_expense(self.expenses)
 
 
     def show_expense(self):
@@ -21,7 +21,7 @@ class ExpenseTracker:
     def delete_expense(self, expense):
         try:
             self.expenses.remove(expense)
-            save_expense(self.expenses)
+            self.storage.save_expense(self.expenses)
             return True
         except ValueError:
             return False
@@ -40,5 +40,5 @@ class ExpenseTracker:
         if expense is None:
             return False
         expense.amount = amount
-        save_expense(self.expenses)
+        self.storage.save_expense(self.expenses)
         return True

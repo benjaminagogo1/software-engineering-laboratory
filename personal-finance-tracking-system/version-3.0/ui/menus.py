@@ -5,6 +5,7 @@ from models.expense import Expense
 
 
 def add_expense_menu(tracker):
+    print(id(tracker))
     name = input("Enter expense name ")
     date = input("Enter the date: ")
     try:

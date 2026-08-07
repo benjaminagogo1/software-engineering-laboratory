@@ -13,5 +13,10 @@
         "name": "Meat",
         "amount": 1000,
         "date": "6/8/26"
+    },
+    {
+        "name": "Ben",
+        "amount": 5000,
+        "date": "7/8/26"
     }
 ]
