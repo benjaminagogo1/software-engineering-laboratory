@@ -1,7 +1,7 @@
-from storage import load_expense
+from storage.json_storage import load_expense
 
-from tracker import ExpenseTracker
-import menus
+from services.tracker import ExpenseTracker
+from ui import menus
 
 
 

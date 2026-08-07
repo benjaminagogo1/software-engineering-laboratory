@@ -594,3 +594,58 @@ Virtual Machine
 Machine Code (while running)
    ↓
 CPU
+
+
+
+
+Version 1
+Programming
+
+↓
+
+Version 2
+Modular Programming
+
+↓
+
+Version 3
+Data Modeling
+
+↓
+
+Version 4
+Object-Oriented Design
+
+↓
+
+Version 5
+Testing
+
+↓
+
+Version 6
+Database
+
+↓
+
+Version 7
+REST API
+
+↓
+
+Version 8
+Authentication
+
+↓
+
+Version 9
+Docker
+
+↓
+
+Version 10
+Deployment
+
+↓
+
+Production

@@ -1,6 +1,6 @@
 print("menus.py is executing...")
 
-from models import Expense
+from models.expense import Expense
 
 
 

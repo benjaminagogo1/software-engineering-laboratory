@@ -1,5 +1,5 @@
 import json
-from models import Expense
+from models.expense import Expense
 print("storage.py is executing...")
 
 
@@ -18,13 +18,12 @@ def save_expense(expenses):
 
 
 
-
 def load_expense():
     try:
         with open("data/expense.json", "r") as read_file:
             content = read_file.read()
             if content.strip() == "":
-                print("No expense saved.")
+                print("No expense saved yet.")
                 return []
             data = json.loads(content)
             expenses = []
