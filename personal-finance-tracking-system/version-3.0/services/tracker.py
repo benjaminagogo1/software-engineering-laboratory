@@ -2,9 +2,8 @@ from models.expense import Expense
 
 class ExpenseTracker:
     def __init__(self, storage):
-        self.expenses = []
         self.storage = storage
-
+        self.expenses = storage.load()
 
     def add_expense(self, expense):
         self.expenses.append(expense)

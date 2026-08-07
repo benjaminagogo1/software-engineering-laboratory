@@ -1,8 +1,12 @@
 from storage import load_expense
 
 from tracker import ExpenseTracker
+import sys
 import menus
 
+
+print("menu" in sys.modules)
+print(sys.modules.get("menu"))
 
 
 tracker = ExpenseTracker()

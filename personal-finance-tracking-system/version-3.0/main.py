@@ -10,11 +10,7 @@ from ui import menus
    
 def main():
     storage = JsonStorage()
-
     tracker = ExpenseTracker(storage)
-
-    tracker.expenses = storage.load()
-
 
     running = True
     while running:

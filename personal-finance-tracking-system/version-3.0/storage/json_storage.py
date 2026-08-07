@@ -1,5 +1,8 @@
 import json
 from models.expense import Expense
+from pathlib import Path
+
+DATA_FILE = Path(__file__).resolve().parent.parent / "data" / "expense.json"
 
 
 class JsonStorage:
@@ -18,14 +21,14 @@ class JsonStorage:
         )
 
         try:
-            with open("data/expense.json", "w") as save_file:
+            with open(DATA_FILE, "w") as save_file:
                 save_file.write(text)
         except OSError:
             print("Error: Unable to write to the file.")
 
     def load(self):
         try:
-            with open("data/expense.json", "r") as read_file:
+            with open(DATA_FILE, "r") as read_file:
                 content = read_file.read()
 
                 if content.strip() == "":
