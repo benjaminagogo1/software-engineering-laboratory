@@ -30,18 +30,22 @@ class ExpenseTracker:
             return False
 
 
-
     def search_expense(self, name):
+        name = name.strip().lower()
+
+        matches = []
+
         for expense in self.expenses:
-            if expense.name == name:
-                return expense
-                
-        return None
-        
-    def update_expense(self, name, amount):
-        expense = self.search_expense(name)
-        if expense is None:
-            return False
+            if name in expense.name.lower():
+                matches.append(expense)
+
+        return matches
+
+
+    def update_expense(self, expense, amount):
         expense.amount = amount
-        self.storage.save_expense(self.expenses)
+
+        if not self.storage.save_expense(self.expenses):
+            return False
+
         return True

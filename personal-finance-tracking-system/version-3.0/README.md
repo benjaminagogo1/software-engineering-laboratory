@@ -38,3 +38,19 @@ What is abstraction?
 At its simplest:
 
 Abstraction means exposing what another part needs to know while hiding how it is implemented.
+
+### data/schema migration.
+
+### backward compatibility and data migration.
+
+
+##### None is a singleton object representing absence of a value.
+
+### 1.
+for index in range(len(matches)):
+    print(index, matches[index])
+
+### 2. But Python gives us a cleaner way:
+
+for index, expense in enumerate(matches):
+    print(index, expense)

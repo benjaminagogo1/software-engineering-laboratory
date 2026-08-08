@@ -2,26 +2,46 @@
     {
         "name": "Akpu",
         "amount": 400,
-        "date": "5/8/26"
+        "date": "2026-08-05"
     },
     {
         "name": "Groundnut",
         "amount": 100,
-        "date": "5/8/26"
+        "date": "2026-08-05"
     },
     {
         "name": "Meat",
         "amount": 1000,
-        "date": "6/8/26"
+        "date": "2026-08-06"
     },
     {
         "name": "Food@Madam-M",
         "amount": 2200,
-        "date": "7/8/26"
+        "date": "2026-08-07"
     },
     {
         "name": "Bag-Of-Sachet-Water",
         "amount": 400,
-        "date": "7/8/26"
+        "date": "2026-08-07"
+    },
+    {
+        "name": "Data-Sub",
+        "amount": 2100,
+        "date": "2026-08-07"
+    },
+    {
+        "name": "Transport-To_FUSHO",
+        "amount": 1500,
+        "date": "2026-08-08"
+    },
+    {
+        "name": "Money-To-My-Mum",
+        "amount": 11000,
+        "date": "2026-08-08"
+    },
+    {
+        "name": "Food@Mkt",
+        "amount": 1150,
+        "date": "2026-08-08"
     }
 ]

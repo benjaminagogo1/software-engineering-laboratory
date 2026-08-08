@@ -1,5 +1,6 @@
 import json
 from models.expense import Expense
+from datetime import datetime
 from pathlib import Path
 
 DATA_FILE = Path(__file__).resolve().parent.parent / "data" / "expense.json"
@@ -13,7 +14,7 @@ class JsonStorage:
                 {
                     "name": expense.name,
                     "amount": expense.amount,
-                    "date": expense.date
+                    "date": expense.date.isoformat()
                 }
                 for expense in expenses
             ],
@@ -41,11 +42,15 @@ class JsonStorage:
                 expenses = []
 
                 for item in data:
+                    try:
+                        date = datetime.strptime(item["date"], "%Y-%m-%d").date()
+                    except ValueError:
+                        date = datetime.strptime(item["date"],"%d/%m/%y").date()
                     expenses.append(
                         Expense(
                             item["name"],
                             item["amount"],
-                            item["date"]
+                            date
                         )
                     )
 

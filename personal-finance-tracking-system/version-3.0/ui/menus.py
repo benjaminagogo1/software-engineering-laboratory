@@ -25,6 +25,7 @@ def add_expense_menu(tracker):
     except ValueError as error:
         print(error)
         return
+    print(type(expense.date))
     tracker.add_expense(expense)
     print(f"Expense: '{expense.name}' added successfully!")
 
@@ -37,33 +38,61 @@ def show_expense_menu(tracker):
 
 def search_expense_menu(tracker):
     name = input("Enter expense name: ")
-    expense = tracker.search_expense(name)
-    if expense is None:
-        print("Expense is not found. ")
-    else:
-        print(expense.name, expense.amount, expense.date)
-
-
+    matches = tracker.search_expense(name)
+    if not matches:
+        print(f"Item '{name}' was not found.")
+        return
+    for expense in matches:
+        print(f"Name: {expense.name}")
+        print(f"Amount: {expense.amount}")
+        print(f"Date: {expense.date}")
 
 def update_expense_menu(tracker):
-    name = input("Enter expense name: ")
-    expense = tracker.search_expense(name)
-    if expense is None:
-        print("Expense not found.")
+    name = input("Enter expense name to update: ")
+
+    matches = tracker.search_expense(name)
+
+    if not matches:
+        print(f"Item '{name}' was not found.")
         return
-    else:
-        print("Expense found.")
-        print(expense.name, expense.amount, expense.date)
+
+    print("\nMatching expenses:")
+
+    for index, expense in enumerate(matches, start=1):
+        print(
+            f"{index}. {expense.name} - "
+            f"{expense.amount} - {expense.date}"
+        )
+
+    try:
+        choice = int(input("Choose an expense: "))
+    except ValueError:
+        print("Invalid choice. Please enter a number.")
+        return
+
+    if choice < 1 or choice > len(matches):
+        print("Invalid expense selection.")
+        return
+
+    selected_expense = matches[choice - 1]
+
     try:
         amount = int(input("Enter new amount: "))
     except ValueError:
-        print("Error: Please, only digits are allowed.")
+        print("Please, only digits are allowed.")
         return
-    tracker.update_expense(name, amount)
-    print(f"Expense '{expense.name}' updated successfully!")
-   
 
+    if amount <= 0:
+        print("Amount must be greater than zero.")
+        return
 
+    if tracker.update_expense(selected_expense, amount):
+        print(
+            f"Expense '{selected_expense.name}' "
+            "updated successfully."
+        )
+    else:
+        print("Unable to update expense.")
 def delete_expense_menu(tracker):
     name = input("Enter expense name: ")
     expense = tracker.search_expense(name)
