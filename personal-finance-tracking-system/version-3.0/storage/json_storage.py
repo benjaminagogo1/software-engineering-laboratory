@@ -7,7 +7,7 @@ DATA_FILE = Path(__file__).resolve().parent.parent / "data" / "expense.json"
 
 class JsonStorage:
 
-    def save(self, expenses):
+    def save_expense(self, expenses):
         text = json.dumps(
             [
                 {
@@ -24,7 +24,8 @@ class JsonStorage:
             with open(DATA_FILE, "w") as save_file:
                 save_file.write(text)
         except OSError:
-            print("Error: Unable to write to the file.")
+            return False
+        return True
 
     def load(self):
         try:

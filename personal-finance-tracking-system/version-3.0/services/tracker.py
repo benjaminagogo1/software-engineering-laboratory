@@ -7,7 +7,11 @@ class ExpenseTracker:
 
     def add_expense(self, expense):
         self.expenses.append(expense)
-        self.storage.save_expense(self.expenses)
+
+        if not self.storage.save_expense(self.expenses):
+            self.expenses.remove(expense)
+            return False
+        return True
 
 
     def show_expense(self):

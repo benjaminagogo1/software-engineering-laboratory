@@ -1,22 +1,32 @@
 print("menus.py is executing...")
+from datetime import datetime
 
 from models.expense import Expense
 
 
 
 def add_expense_menu(tracker):
-    print(id(tracker))
     name = input("Enter expense name ")
     date = input("Enter the date: ")
+    try:
+        date = datetime.strptime(date, "%Y-%m-%d").date()
+    except ValueError:
+        print("Invalid date. Use YYYY-MM-DD.")
+        return
+    
     try:
         amount = int(input("Enter expense amount "))
     except ValueError:
         print("Please, only digits are allowed.")
         return  
-
-    expense = Expense(name, amount, date)
+    
+    try:
+        expense = Expense(name, amount, date)
+    except ValueError as error:
+        print(error)
+        return
     tracker.add_expense(expense)
-    print(f"Expense: '{expense.name}' added successfully!'")
+    print(f"Expense: '{expense.name}' added successfully!")
 
 
 

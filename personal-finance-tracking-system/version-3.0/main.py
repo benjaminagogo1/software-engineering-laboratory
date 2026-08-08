@@ -5,12 +5,11 @@ from ui import menus
 
 
 
-
-
-   
 def main():
     storage = JsonStorage()
     tracker = ExpenseTracker(storage)
+    print(storage)
+    print(tracker)
 
     running = True
     while running:
@@ -28,7 +27,6 @@ def main():
             print("Invalid input: Please, only digits are allowed.")
             continue
         if choice == 1:
-            
             menus.add_expense_menu(tracker)
 
         if choice == 2:
