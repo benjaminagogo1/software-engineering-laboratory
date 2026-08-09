@@ -1,4 +1,3 @@
-print("first")
 from app.repositories.expense_repository import ExpenseRepository
 from app.storage.json_storage import JsonStorage
 from app.models.expense import Expense
@@ -24,7 +23,7 @@ class JsonExpenseRepository(ExpenseRepository):
         self.storage.save(data)
 
 
-    def get_all(self):
+    def get_all_expenses(self):
         data = self.storage.load()
 
         self.expenses = []
@@ -45,9 +44,3 @@ class JsonExpenseRepository(ExpenseRepository):
         print("Deleting expense")
 
 
-repository = JsonExpenseRepository()
-
-expense = Expense("Food", 500)
-
-repository.add(expense)
-repository.save()

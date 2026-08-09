@@ -12,7 +12,7 @@ class ExpenseRepository(ABC):
         pass
 
     @abstractmethod
-    def get_all(self):
+    def get_all_expenses(self):
         pass
 
     @abstractmethod
