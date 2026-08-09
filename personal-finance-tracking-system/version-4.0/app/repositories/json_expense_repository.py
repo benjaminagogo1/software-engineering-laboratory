@@ -12,7 +12,7 @@ class JsonExpenseRepository(ExpenseRepository):
     def add(self, expense):
         self.expenses.append(expense)
 
-    def save(self, expense):
+    def save(self):
         data = []
 
         for expense in self.expenses:
@@ -47,3 +47,7 @@ class JsonExpenseRepository(ExpenseRepository):
 
 repository = JsonExpenseRepository()
 
+expense = Expense("Food", 500)
+
+repository.add(expense)
+repository.save()

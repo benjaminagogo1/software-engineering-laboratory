@@ -1,5 +1,4 @@
 import json
-print("sssssecond")
 
 
 class JsonStorage:
