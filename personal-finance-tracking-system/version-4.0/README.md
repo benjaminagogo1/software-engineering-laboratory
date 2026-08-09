@@ -52,7 +52,7 @@ the @abstractmethod is telling Python:
 In other words:
 
 "This method is part of the contract, but this class does not provide the actual implementation."
-
+- "This operation is required; child classes are responsible for providing the actual behavior."
 
 does not mean:
 
@@ -61,3 +61,7 @@ does not mean:
 It means:
 
 "Any concrete subclass must provide how save() works."
+
+### instantiate
+
+It means create an object from a class.

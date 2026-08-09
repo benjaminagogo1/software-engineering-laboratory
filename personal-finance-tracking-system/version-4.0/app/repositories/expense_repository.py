@@ -4,7 +4,11 @@ from abc import ABC, abstractmethod
 class ExpenseRepository(ABC):
 
     @abstractmethod
-    def save(self, expense):
+    def add(self, expense):
+        pass
+
+    @abstractmethod
+    def save(self):
         pass
 
     @abstractmethod
