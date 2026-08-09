@@ -93,20 +93,47 @@ def update_expense_menu(tracker):
         )
     else:
         print("Unable to update expense.")
+
+
 def delete_expense_menu(tracker):
-    name = input("Enter expense name: ")
-    expense = tracker.search_expense(name)
-    if expense is None:
-        print("Expense is not found.")
+    name = input("Enter expense name to delete: ")
+
+    matches = tracker.search_expense(name)
+
+    if not matches:
+        print(f"Item '{name}' was not found.")
         return
+
+    print("\nMatching expenses:")
+
+    for index, expense in enumerate(matches, start=1):
+        print(
+            f"{index}. {expense.name} - "
+            f"{expense.amount} - {expense.date}"
+        )
+
+    try:
+        choice = int(input("Choose an expense to delete: "))
+    except ValueError:
+        print("Invalid choice. Please enter a number.")
+        return
+
+    if choice < 1 or choice > len(matches):
+        print("Invalid expense selection.")
+        return
+
+    selected_expense = matches[choice - 1]
+
+    confirmation = input(
+        f"Delete '{selected_expense.name}' "
+        f"({selected_expense.amount})? (y/n): "
+    ).strip().lower()
+
+    if confirmation != "y":
+        print("Deletion cancelled.")
+        return
+
+    if tracker.delete_expense(selected_expense):
+        print(f"Expense '{selected_expense.name}' deleted successfully.")
     else:
-        print("Expense found.")
-        print(expense.name, expense.amount, expense.date)
-    print("Are you sure?  (yes/no)")
-    choice = input("Enter your choice. ").lower()
-    if choice == "yes":  
-        tracker.delete_expense(expense)
-        print(f"Expense '{expense.name}' deleted successfully!")
-    else:
-        print("Deletion cancelled")
-    
+        print("Unable to delete expense.")
