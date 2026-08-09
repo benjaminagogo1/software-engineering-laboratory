@@ -4,11 +4,11 @@ class ExpenseService:
     def __init__(self, repository):
         self.repository = repository
 
-    def get_all_expense(self):
-        return self.repository.get_all()
+    def get_all_expenses(self):
+        return self.repository.get_all_expenses()
 
     def search_expenses(self, name):
-        expenses = self.repository.get_all()
+        expenses = self.repository.get_all_expenses()
 
         matches = []
 
