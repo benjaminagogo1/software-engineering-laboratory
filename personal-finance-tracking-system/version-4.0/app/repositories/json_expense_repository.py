@@ -43,4 +43,10 @@ class JsonExpenseRepository(ExpenseRepository):
     def delete(self, expense):
         print("Deleting expense")
 
+    def update(self, expense):
+        self.save()
 
+
+    def delete(self, expense):
+        self.expenses.remove(expense)
+        self.save()

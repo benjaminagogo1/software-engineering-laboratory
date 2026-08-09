@@ -25,3 +25,6 @@ class ExpenseService:
     def add_expense(self, expense):
         self.repository.add(expense)
         return self.repository.save()
+    
+    def delete_expense(self, expense):
+        return self.repository.delete(expense)

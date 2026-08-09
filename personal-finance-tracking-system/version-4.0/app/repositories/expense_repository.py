@@ -20,5 +20,11 @@ class ExpenseRepository(ABC):
         pass
 
     @abstractmethod
+    def update(self, expense):
+        pass
+
+    @abstractmethod
     def delete(self, expense):
         pass
+
+    
