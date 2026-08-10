@@ -37,9 +37,6 @@ class JsonExpenseRepository(ExpenseRepository):
 
         return self.expenses
 
-    def find_by_name(self, name):
-        print("Finding expense")
-
     def update(self, expense):
         self.save()
 

@@ -23,7 +23,6 @@ def show_expenses_menu(service):
         print(f"Amount: {expense.amount}")
 
 
-
 def search_expenses_menu(service):
     name = input("Enter expense name: ")
 
@@ -36,8 +35,6 @@ def search_expenses_menu(service):
     for expense in matches:
         print(f"Name: {expense.name}")
         print(f"Amount: {expense.amount}")
-
-
 
 
 def update_expense_menu(service):
@@ -56,8 +53,6 @@ def update_expense_menu(service):
     service.update_expense(expense, amount)
 
     print("Expense updated successfully.")
-
-
 
 
 def delete_expense_menu(service):

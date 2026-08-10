@@ -65,3 +65,43 @@ It means:
 ### instantiate
 
 It means create an object from a class.
+
+
+
+
+The key idea
+
+Dependency injection doesn't mean "passing an argument."
+
+The deeper idea is:
+
+A component receives its dependencies from outside instead of constructing those dependencies itself.
+
+
+
+
+
+
+
+Then we'll have to solve interesting questions:
+
+How do we find the next ID?
+What happens after deleting ID 2?
+Should IDs be reused?
+What if the application crashes while creating an ID?
+What happens if two processes generate an ID simultaneously?
+Should the model or repository generate it?
+Why shouldn't we use the array/list index as the ID?
+
+Those are real software-engineering questions, not just syntax.
+
+Then when we move to SQLite and the database says:
+
+"I'll generate the ID for you."
+
+you'll understand why databases have mechanisms such as auto-incrementing/identity columns rather than simply treating them as magic.
+
+And later, when we introduce UUIDs, you'll understand why a system might choose:
+
+
+#### This is called a race condition.

@@ -15,9 +15,6 @@ class ExpenseRepository(ABC):
     def get_all_expenses(self):
         pass
 
-    @abstractmethod
-    def find_by_name(self, name):
-        pass
 
     @abstractmethod
     def update(self, expense):
