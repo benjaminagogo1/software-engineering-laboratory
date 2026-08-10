@@ -32,16 +32,13 @@ class JsonExpenseRepository(ExpenseRepository):
             expense = Expense(
             item["name"],
             item["amount"]
-        )
-        self.expenses.append(expense)
+            )
+            self.expenses.append(expense)
 
         return self.expenses
 
     def find_by_name(self, name):
         print("Finding expense")
-
-    def delete(self, expense):
-        print("Deleting expense")
 
     def update(self, expense):
         self.save()

@@ -20,7 +20,7 @@ class ExpenseService:
 
     def update_expense(self, expense, amount):
         expense.amount = amount
-        return self.repository.save()
+        return self.repository.update(expense)
 
     def add_expense(self, expense):
         self.repository.add(expense)
