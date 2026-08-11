@@ -270,3 +270,17 @@ JsonExpenseRepository   Future SqlExpenseRepository
           │
           ▼
     expense.json
+
+
+
+Inheritance
+     ↓
+Abstraction
+     ↓
+Method overriding
+     ↓
+Polymorphism
+     ↓
+Dependency injection
+     ↓
+Loose coupling
