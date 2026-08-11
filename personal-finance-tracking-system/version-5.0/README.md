@@ -350,3 +350,30 @@ Concurrency
    │
    ▼
 V5 COMPLETE
+
+
+
+
+                 ┌──────────────┐
+                 │      UI      │
+                 └──────┬───────┘
+                        ↓
+                 ┌──────────────┐
+                 │   Service    │
+                 └──────┬───────┘
+                        ↓
+              ┌────────────────────┐
+              │ ExpenseRepository  │
+              │    (abstraction)   │
+              └─────────┬──────────┘
+                        ↑
+              ┌─────────┴──────────┐
+              │                    │
+       JsonExpenseRepository   Future repository
+              │
+              ↓
+        ┌────────────┐
+        │ JsonStorage│
+        └─────┬──────┘
+              ↓
+        expense.json
