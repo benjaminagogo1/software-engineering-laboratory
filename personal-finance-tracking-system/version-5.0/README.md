@@ -377,3 +377,67 @@ V5 COMPLETE
         └─────┬──────┘
               ↓
         expense.json
+
+
+
+
+                      ExpenseRepository
+              (public contract)
+                    │
+        ┌───────────┴───────────┐
+        │                       │
+      add()                  delete()
+      update()               find_by_id()
+      get_all()
+                    │
+                    ▼
+          JsonExpenseRepository
+                    │
+              internal save()
+                    │
+                    ▼
+             JsonStorage
+                    │
+                    ▼
+             expense.json
+
+
+    
+
+
+
+                 USER
+                   │
+                   ▼
+                  UI
+                   │
+                   │ Expense object
+                   ▼
+               SERVICE
+                   │
+                   │ add(expense)
+                   ▼
+              REPOSITORY
+                   │
+          ┌────────┴────────┐
+          │                 │
+      get_all()         assign ID
+          │                 │
+          └────────┬────────┘
+                   │
+                   ▼
+             self.expenses
+                   │
+                   │ save()
+                   ▼
+               STORAGE
+                   │
+                   │ json.dump()
+                   ▼
+              expense.json
+
+
+
+### delete a particular file
+
+> data/expense.json
