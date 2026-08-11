@@ -40,6 +40,8 @@ class JsonExpenseRepository(ExpenseRepository):
 
         self.expenses.append(expense)
 
+        self.save()
+
     def find_by_id(self, expense_id):
         expenses = self.get_all()
 

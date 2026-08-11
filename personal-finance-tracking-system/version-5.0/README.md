@@ -284,3 +284,69 @@ Polymorphism
 Dependency injection
      ↓
 Loose coupling
+
+
+
+version-5.0/
+│
+├── app/
+│   ├── models/
+│   │   └── expense.py
+│   │
+│   ├── repositories/
+│   │   ├── expense_repository.py
+│   │   └── json_expense_repository.py
+│   │
+│   ├── services/
+│   │   └── expense_service.py
+│   │
+│   ├── storage/
+│   │   └── json_storage.py
+│   │
+│   └── ui/
+│       └── menus.py
+│
+├── data/
+│   └── expense.json
+│
+└── main.py
+
+
+CURRENT
+   │
+   ▼
+Finish the application flow
+   │
+   ├── proper menu behavior
+   ├── input handling
+   ├── error handling
+   └── clean Service/UI interaction
+   │
+   ▼
+Improve Repository behavior
+   │
+   ├── consistent return values
+   ├── update/delete semantics
+   └── persistence consistency
+   │
+   ▼
+Complete the domain model
+   │
+   └── only the fields/rules actually belonging to V5
+   │
+   ▼
+Test the whole application
+   │
+   ▼
+Refactor where necessary
+   │
+   ▼
+Concurrency
+   │
+   ├── careful read-modify-write
+   ├── file locks
+   ├── process locks
+   └── atomic file replacement
+   │
+   ▼
+V5 COMPLETE

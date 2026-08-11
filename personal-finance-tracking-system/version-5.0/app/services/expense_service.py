@@ -5,7 +5,6 @@ class ExpenseService:
 
     def add_expense(self, expense):
         self.repository.add(expense)
-        return self.repository.save()
 
     def get_all_expenses(self):
         return self.repository.get_all()

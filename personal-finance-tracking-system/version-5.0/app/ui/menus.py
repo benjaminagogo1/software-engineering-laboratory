@@ -42,9 +42,16 @@ def search_expenses_menu(service):
 
 
 def update_expense_menu(service):
-    expense_id = int(input("Enter expense ID to update: "))
-    amount = float(input("Enter new amount: "))
-
+    try:
+        expense_id = int(input("Enter expense ID to update: "))
+    except ValueError:
+        print("Invalid expense ID. Please enter a number.")
+        return
+    try:
+        amount = float(input("Enter new amount: "))
+    except ValueError:
+        print("Invalid input. Please enter a number.")
+        return
     updated = service.update_expense(expense_id, amount)
 
     if updated:
@@ -54,8 +61,11 @@ def update_expense_menu(service):
 
 
 def delete_expense_menu(service):
-    expense_id = int(input("Enter expense ID to delete: "))
-
+    try:
+        expense_id = int(input("Enter expense ID to delete: "))
+    except ValueError:
+        print("Invalid expense ID. Please enter a number.")
+        return
     deleted = service.delete_expense_by_id(expense_id)
 
     if deleted:
