@@ -1,15 +1,31 @@
+from app.services.results import UpdateResult, AddResult
+from app.models.expense import Expense
+
 def add_expense_menu(service):
     name = input("Enter expense name: ")
-    amount = float(input("Enter expense amount: "))
+
+    amount_input = input("Enter expense amount: ")
+
+    try:
+        amount = float(amount_input)
+    except ValueError:
+        print("Invalid amount. Please enter a number.")
+        return
 
     from app.models.expense import Expense
 
     expense = Expense(None, name, amount)
 
-    service.add_expense(expense)
+    result = service.add_expense(expense)
 
-    print("Expense added successfully.")
+    if result == AddResult.SUCCESS:
+        print("Expense added successfully.")
 
+    elif result == AddResult.INVALID_NAME:
+        print("Expense name cannot be empty.")
+
+    elif result == AddResult.INVALID_AMOUNT:
+        print("Amount must be greater than zero.")
 
 def show_expenses_menu(service):
     expenses = service.get_all_expenses()
@@ -41,23 +57,35 @@ def search_expenses_menu(service):
         print()
 
 
+
+
 def update_expense_menu(service):
+    expense_id_input = input("Enter expense ID to update: ")
+
     try:
-        expense_id = int(input("Enter expense ID to update: "))
+        expense_id = int(expense_id_input)
     except ValueError:
         print("Invalid expense ID. Please enter a number.")
         return
-    try:
-        amount = float(input("Enter new amount: "))
-    except ValueError:
-        print("Invalid input. Please enter a number.")
-        return
-    updated = service.update_expense(expense_id, amount)
 
-    if updated:
+    amount_input = input("Enter new amount: ")
+
+    try:
+        amount = float(amount_input)
+    except ValueError:
+        print("Invalid amount. Please enter a number.")
+        return
+
+    result = service.update_expense(expense_id, amount)
+
+    if result == UpdateResult.SUCCESS:
         print("Expense updated successfully.")
-    else:
+
+    elif result == UpdateResult.NOT_FOUND:
         print("Expense not found.")
+
+    elif result == UpdateResult.INVALID_AMOUNT:
+        print("Amount must be greater than zero.")
 
 
 def delete_expense_menu(service):

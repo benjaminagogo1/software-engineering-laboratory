@@ -441,3 +441,14 @@ V5 COMPLETE
 ### delete a particular file
 
 > data/expense.json
+
+
+
+
+
+
+Service                         UI
+
+UpdateResult.SUCCESS       →    "Expense updated successfully."
+UpdateResult.NOT_FOUND     →    "Expense not found."
+UpdateResult.INVALID_AMOUNT →   "Amount must be greater than zero."

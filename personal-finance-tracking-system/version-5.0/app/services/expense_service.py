@@ -1,11 +1,23 @@
+from app.services.results import UpdateResult
+from app.services.results import AddResult
+
+
 class ExpenseService:
 
     def __init__(self, repository):
         self.repository = repository
 
     def add_expense(self, expense):
+        if not expense.name.strip():
+            return AddResult.INVALID_NAME
+
+        if expense.amount <= 0:
+            return AddResult.INVALID_AMOUNT
+
         self.repository.add(expense)
 
+        return AddResult.SUCCESS
+    
     def get_all_expenses(self):
         return self.repository.get_all()
 
@@ -24,12 +36,15 @@ class ExpenseService:
     
 
     def update_expense(self, expense_id, amount):
+        if amount <= 0:
+            return UpdateResult.INVALID_AMOUNT
+
         expense = self.repository.find_by_id(expense_id)
 
         if expense is None:
-            return False
+            return UpdateResult.NOT_FOUND
 
         expense.amount = amount
         self.repository.update(expense)
 
-        return True
+        return UpdateResult.SUCCESS
