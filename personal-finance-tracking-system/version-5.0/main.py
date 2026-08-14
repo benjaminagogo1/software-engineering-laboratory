@@ -1,5 +1,6 @@
 from app.repositories.json_expense_repository import JsonExpenseRepository
 from app.services.expense_service import ExpenseService
+from app.repositories.memory_expense_repository import MemoryExpenseRepository
 
 from app.ui.menus import (
     add_expense_menu,
@@ -10,7 +11,7 @@ from app.ui.menus import (
 
 
 def main():
-    repository = JsonExpenseRepository()
+    repository = MemoryExpenseRepository()
     service = ExpenseService(repository)
 
     while True:

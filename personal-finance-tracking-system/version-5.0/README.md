@@ -452,3 +452,36 @@ Service                         UI
 UpdateResult.SUCCESS       →    "Expense updated successfully."
 UpdateResult.NOT_FOUND     →    "Expense not found."
 UpdateResult.INVALID_AMOUNT →   "Amount must be greater than zero."
+
+
+
+ExpenseRepository
+       ↑
+       ├── JsonExpenseRepository
+       ├── SQLiteExpenseRepository
+       └── PostgreSQLExpenseRepository
+
+
+
+
+
+
+### QUESTIONS 
+
+what is happenning here?
+
+def get_all(self):
+    data = self.storage.load()
+
+    self.expenses = []
+
+    for item in data:
+        expense = Expense(
+            item["id"],
+            item["name"],
+            item["amount"]
+        )
+
+        self.expenses.append(expense)
+
+    return self.expenses
