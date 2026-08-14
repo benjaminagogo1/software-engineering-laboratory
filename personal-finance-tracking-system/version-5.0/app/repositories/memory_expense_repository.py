@@ -27,3 +27,6 @@ class MemoryExpenseRepository(ExpenseRepository):
 
     def update(self, expense):
         pass
+
+    def delete(self, expense):
+        self.expenses.remove(expense)
