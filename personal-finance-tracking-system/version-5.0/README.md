@@ -485,3 +485,16 @@ def get_all(self):
         self.expenses.append(expense)
 
     return self.expenses
+
+
+
+    ExpenseRepository
+       │
+       ├── add()
+       ├── get_all()
+       ├── find_by_id()
+       ├── update()
+       └── delete()
+             ▲
+             │
+    MemoryExpenseRepository
