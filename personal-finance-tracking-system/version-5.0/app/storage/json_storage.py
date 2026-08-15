@@ -19,6 +19,11 @@ class JsonStorage:
         except json.JSONDecodeError as error:
             raise StorageError("Expense storage is corrupted") from error
 
+
+
+
+
+
     def save(self, data):
         with open("data/expense.json", "w") as save_file:
             json.dump(data, save_file, indent=4)

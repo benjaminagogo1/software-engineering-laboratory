@@ -9,8 +9,6 @@ class JsonExpenseRepository(ExpenseRepository):
         self.expenses = []
 
     
-
-
     def get_all(self):
         data = self.storage.load()
 
@@ -42,6 +40,7 @@ class JsonExpenseRepository(ExpenseRepository):
 
         self.save()
 
+
     def find_by_id(self, expense_id):
         expenses = self.get_all()
 
@@ -62,7 +61,7 @@ class JsonExpenseRepository(ExpenseRepository):
     def save(self):
         data = []
 
-        for expense in self.expenses        :
+        for expense in self.expenses:
             data.append({
                 "id": expense.id,
                 "name": expense.name,

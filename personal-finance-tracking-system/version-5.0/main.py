@@ -11,7 +11,7 @@ from app.ui.menus import (
 
 
 def main():
-    repository = MemoryExpenseRepository()
+    repository = JsonExpenseRepository()
     service = ExpenseService(repository)
 
     while True:
@@ -45,3 +45,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    4

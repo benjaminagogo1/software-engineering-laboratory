@@ -498,3 +498,33 @@ def get_all(self):
              ▲
              │
     MemoryExpenseRepository
+
+
+
+
+                 ┌──────────────────┐
+                 │       UI         │
+                 └────────┬─────────┘
+                          │
+                          ▼
+                 ┌──────────────────┐
+                 │  ExpenseService  │
+                 │                  │
+                 │ Business rules   │
+                 └────────┬─────────┘
+                          │
+                          ▼
+                 ┌──────────────────┐
+                 │ ExpenseRepository│
+                 │   (abstraction)  │
+                 └────────┬─────────┘
+                          │
+             ┌────────────┴────────────┐
+             ▼                         ▼
+   JsonExpenseRepository      MemoryExpenseRepository
+             │                         │
+             ▼                         ▼
+       JsonStorage               Python list
+             │
+             ▼
+       expense.json
