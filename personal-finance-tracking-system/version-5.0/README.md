@@ -528,3 +528,40 @@ def get_all(self):
              │
              ▼
        expense.json
+
+
+
+### We've now actually used:
+
+- abstraction
+- inheritance
+- abstract methods
+- dependency injection
+- polymorphism
+- separation of concerns
+- business validation
+- persistence abstraction
+- domain objects
+
+
+
+
+
+### The architecture in terms of responsibility
+
+Here's the most important table:
+
+
+| Component                 | Main responsibility                  |
+| ------------------------- | ------------------------------------ |
+| `Expense`                 | Represents an expense                |
+| UI / menus                | Talks to the user                    |
+| `ExpenseService`          | Performs business operations/rules   |
+| `ExpenseRepository`       | Defines persistence operations       |
+| `JsonExpenseRepository`   | Persists expenses using JSON storage |
+| `MemoryExpenseRepository` | Stores expenses in memory            |
+| `JsonStorage`             | Reads/writes JSON                    |
+| `expense.json`            | Persistent data                      |
+
+
+## This is separation of concerns.
