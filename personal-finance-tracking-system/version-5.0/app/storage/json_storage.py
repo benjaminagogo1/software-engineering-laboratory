@@ -13,8 +13,6 @@ class JsonStorage:
                     return []
 
                 return json.loads(data)
-        except ValueError:
-            return []
         
         except json.JSONDecodeError as error:
             raise StorageError("Expense storage is corrupted") from error

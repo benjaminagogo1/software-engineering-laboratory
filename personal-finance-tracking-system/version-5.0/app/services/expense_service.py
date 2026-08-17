@@ -1,11 +1,11 @@
 from app.services.results import UpdateResult
 from app.services.results import AddResult
 from app.services.results import DeleteResult
-
+from app.repositories.expense_repository import ExpenseRepository
 
 class ExpenseService:
 
-    def __init__(self, repository):
+    def __init__(self, repository: ExpenseRepository):
         self.repository = repository
 
     def add_expense(self, expense):

@@ -23,6 +23,4 @@ class ExpenseRepository(ABC):
     def delete(self, expense):
         pass
 
-    # @abstractmethod
-    # def save(self):
-    #     pass
+  

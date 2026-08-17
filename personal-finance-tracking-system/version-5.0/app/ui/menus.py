@@ -1,16 +1,14 @@
 from app.services.results import UpdateResult, AddResult, DeleteResult
-from app.ui.input_helpers import read_int
+from app.ui.input_helpers import read_int, read_float
 from app.models.expense import Expense
+from app.storage.storage_error import StorageError
 
 def add_expense_menu(service):
     name = input("Enter expense name: ")
 
-    amount_input = input("Enter expense amount: ")
+    amount = read_float("Enter expense amount: ")
 
-    try:
-        amount = float(amount_input)
-    except ValueError:
-        print("Invalid amount. Please enter a number.")
+    if amount is None:
         return
 
     expense = Expense(None, name, amount)
@@ -27,7 +25,12 @@ def add_expense_menu(service):
         print("Amount must be greater than zero.")
 
 def show_expenses_menu(service):
-    expenses = service.get_all_expenses()
+    try:
+        expenses = service.get_all_expenses()
+
+    except StorageError:
+        print("Unable to load expenses. Storage is corrupted.")
+        return
 
     if not expenses:
         print("No expenses found.")
@@ -63,12 +66,10 @@ def update_expense_menu(service):
 
     if expense_id is None:
         return
-    amount_input = input("Enter new amount: ")
+    
+    amount = read_float("Enter new amount: ")
 
-    try:
-        amount = float(amount_input)
-    except ValueError:
-        print("Invalid amount. Please enter a number.")
+    if amount is None:
         return
 
     result = service.update_expense(expense_id, amount)
