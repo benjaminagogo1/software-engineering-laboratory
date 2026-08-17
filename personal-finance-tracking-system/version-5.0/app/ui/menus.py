@@ -1,4 +1,5 @@
 from app.services.results import UpdateResult, AddResult, DeleteResult
+from app.ui.input_helpers import read_int
 from app.models.expense import Expense
 
 def add_expense_menu(service):
@@ -11,8 +12,6 @@ def add_expense_menu(service):
     except ValueError:
         print("Invalid amount. Please enter a number.")
         return
-
-    from app.models.expense import Expense
 
     expense = Expense(None, name, amount)
 
@@ -60,14 +59,10 @@ def search_expenses_menu(service):
 
 
 def update_expense_menu(service):
-    expense_id_input = input("Enter expense ID to update: ")
+    expense_id = read_int("Enter expense ID to update: ")
 
-    try:
-        expense_id = int(expense_id_input)
-    except ValueError:
-        print("Invalid expense ID. Please enter a number.")
+    if expense_id is None:
         return
-
     amount_input = input("Enter new amount: ")
 
     try:
@@ -89,11 +84,11 @@ def update_expense_menu(service):
 
 
 def delete_expense_menu(service):
-    try:
-        expense_id = int(input("Enter expense ID to delete: "))
-    except ValueError:
-        print("Invalid expense ID. Please enter a number.")
+    expense_id = read_int("Enter expense ID to delete: ")
+
+    if expense_id is None:
         return
+    
     result = service.delete_expense_by_id(expense_id)
 
     if result == DeleteResult.SUCCESS:
