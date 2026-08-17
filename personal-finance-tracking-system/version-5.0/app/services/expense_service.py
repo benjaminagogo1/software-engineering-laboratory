@@ -1,5 +1,6 @@
 from app.services.results import UpdateResult
 from app.services.results import AddResult
+from app.services.results import DeleteResult
 
 
 class ExpenseService:
@@ -24,15 +25,15 @@ class ExpenseService:
     def get_expense_by_id(self, expense_id):
         return self.repository.find_by_id(expense_id)
     
-
     def delete_expense_by_id(self, expense_id):
         expense = self.repository.find_by_id(expense_id)
 
         if expense is None:
-            return False
+            return DeleteResult.NOT_FOUND
 
         self.repository.delete(expense)
-        return True
+
+        return DeleteResult.SUCCESS
     
 
     def update_expense(self, expense_id, amount):

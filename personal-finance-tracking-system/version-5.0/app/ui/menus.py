@@ -1,4 +1,4 @@
-from app.services.results import UpdateResult, AddResult
+from app.services.results import UpdateResult, AddResult, DeleteResult
 from app.models.expense import Expense
 
 def add_expense_menu(service):
@@ -94,9 +94,10 @@ def delete_expense_menu(service):
     except ValueError:
         print("Invalid expense ID. Please enter a number.")
         return
-    deleted = service.delete_expense_by_id(expense_id)
+    result = service.delete_expense_by_id(expense_id)
 
-    if deleted:
+    if result == DeleteResult.SUCCESS:
         print("Expense deleted successfully.")
-    else:
+
+    elif result == DeleteResult.NOT_FOUND:
         print("Expense not found.")

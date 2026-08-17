@@ -1,26 +1,26 @@
 7. This is called serialization
 
-The process:
+- The process:
 
-Python object
+- Python object
       ↓
-JSON-compatible representation
+- JSON-compatible representation
       ↓
-JSON
+- JSON
 
 
 
-And the reverse:
+- And the reverse:
 
-JSON
+- JSON
  ↓
-Python data
+- Python data
  ↓
-Python object
+- Python object
 
-is called deserialization.
+- is called deserialization.
 
-So our Repository is currently doing something like:
+- So our Repository is currently doing something like:
 
         DESERIALIZATION
 JSON ─────────────────────► Expense
@@ -63,76 +63,55 @@ Expense ──────────────────► JSON
 
 
 
-Encapsulation means, broadly:
+## Encapsulation means, broadly:
 
-Controlling how an object's internal state can be accessed or changed.
+- Controlling how an object's internal state can be accessed or changed.
 
-Our current class is very open:
+- Our current class is very open:
 
-expense.id
-expense.name
-expense.amount
+- expense.id
+- expense.name
+- expense.amount
 
-Anyone can directly modify everything.
+- Anyone can directly modify everything.
 
-That's fine for a tiny beginner model.
+- That's fine for a tiny beginner model.
 
 
-CRUD
+## CRUD
  ↓
-Architecture
+- Architecture
  ↓
-Persistence
+- Persistence
  ↓
-State
+- State
  ↓
-Serialization
+- Serialization
  ↓
-Validation
+- Validation
  ↓
-Domain rules
+- Domain rules
  ↓
-Invariants
+- Invariants
  ↓
-Encapsulation
+- Encapsulation
  ↓
-Concurrency
-
-CRUD
- ↓
-Architecture
- ↓
-Persistence
- ↓
-State
- ↓
-Serialization
- ↓
-Validation
- ↓
-Domain rules
- ↓
-Invariants
- ↓
-Encapsulation
- ↓
-Concurrency
+- Concurrency
 
 
 
+- The same interface:
 
-The same interface:
-
-repository.add(...)
+- repository.add(...)
 
 can cause different implementations to execute depending on the actual repository object.
 
-That's polymorphism.
+- That's polymorphism.
 
 
 #### Polymorphism means:
 
-One interface, many possible forms/implementations.
+### One interface, many possible forms/implementations.
 
 
 
@@ -157,7 +136,7 @@ One interface, many possible forms/implementations.
 
 
 
-                         ExpenseService
+                  ExpenseService
                        │
                        │
               repository.add()
@@ -172,20 +151,20 @@ One interface, many possible forms/implementations.
 
 
           Inheritance
-      ↓
-JsonExpenseRepository
-      ↓
-overrides repository methods
-      ↓
-abstraction defines contract
-      ↓
-polymorphism allows Service
+            ↓
+-    JsonExpenseRepository
+            ↓
+-    overrides repository methods
+            ↓
+-    abstraction defines contract
+            ↓
+-    polymorphism allows Service
 to work with different implementations
 
 
 
 
-Inheritance is one mechanism through which polymorphism can be achieved.
+### Inheritance is one mechanism through which polymorphism can be achieved.
 
 
 
@@ -213,7 +192,7 @@ So:
         ▼        ▼        ▼
       JSON     SQL     Memory
 
-This is polymorphism in architecture, not merely an OOP trick.
+- This is polymorphism in architecture, not merely an OOP trick.
 
 
 
@@ -565,3 +544,38 @@ Here's the most important table:
 
 
 ## This is separation of concerns.
+
+
+
+## Transactions
+
+- Databases also provide transactions.
+
+- A transaction lets multiple operations behave as one logical unit.
+
+
+
+
+## 4. Locks / concurrency control
+
+- Databases also have mechanisms for coordinating simultaneous operations.
+
+Conceptually:
+
+Process A
+   ↓
+database
+   🔒
+generate/write
+   ↓
+release
+
+
+Process B
+   ↓
+database
+   waits
+   ↓
+gets its own ID
+
+The actual mechanisms are more sophisticated than simply "lock everything," but the fundamental idea is concurrency control.
