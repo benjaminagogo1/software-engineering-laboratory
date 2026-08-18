@@ -579,3 +579,14 @@ database
 gets its own ID
 
 The actual mechanisms are more sophisticated than simply "lock everything," but the fundamental idea is concurrency control.
+
+
+
+
+
+#### What is a test case?
+
+A test case is a specific situation we create to check whether one piece of software behaves as expected.
+
+
+## This pattern is often called Arrange → Act → Assert.
