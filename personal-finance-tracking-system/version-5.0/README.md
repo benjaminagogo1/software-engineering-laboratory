@@ -686,16 +686,16 @@ One important distinction
 
 Don't confuse these three things:
 
-assert
+### assert
 
 Python's built-in mechanism for checking a condition:
 
 assert result == AddResult.SUCCESS
-Test
+### Test
 
 The code we write to verify one particular behavior.
 
-pytest
+### pytest
 
 The tool that discovers and runs those tests.
 
