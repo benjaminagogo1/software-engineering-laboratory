@@ -590,3 +590,124 @@ A test case is a specific situation we create to check whether one piece of soft
 
 
 ## This pattern is often called Arrange → Act → Assert.
+
+
+## What is assert?
+
+assert is a Python statement used to say:
+
+"I expect this condition to be true."
+
+For example:
+
+assert 2 + 2 == 4
+
+Python checks the condition:
+
+2 + 2 == 4
+
+It is true, so the program continues.
+
+But:
+
+assert 2 + 2 == 5
+
+is false, so Python reports an AssertionError.
+
+
+
+
+### pytest is a Python testing framework.
+
+A testing framework is a tool that helps us organize, run, and report automated tests.
+
+We already know how to write an expectation:
+
+assert result == AddResult.SUCCESS
+
+But imagine we eventually have:
+
+test_add_expense
+test_empty_name
+test_invalid_amount
+test_update_expense
+test_delete_expense
+test_find_expense
+...
+
+We need a tool that can:
+
+find our tests
+run them
+tell us which passed
+tell us which failed
+show useful information when something fails
+
+That's what pytest helps us do.
+
+Without pytest
+
+We could technically write Python code that calls our tests manually:
+
+test_add_expense()
+test_update_expense()
+test_delete_expense()
+
+But as the project grows, that becomes inconvenient.
+
+With pytest
+
+We can organize tests in test files, and then run:
+
+pytest
+
+pytest discovers the tests and runs them for us.
+
+We might eventually see output like:
+
+================ test session starts ================
+
+
+tests/test_expense_service.py .....                  [100%]
+
+
+5 passed
+
+
+================= 5 passed in 0.12s =================
+
+The exact output can vary.
+
+The important idea is:
+
+pytest is the tool that runs and reports our automated Python tests.
+
+One important distinction
+
+Don't confuse these three things:
+
+assert
+
+Python's built-in mechanism for checking a condition:
+
+assert result == AddResult.SUCCESS
+Test
+
+The code we write to verify one particular behavior.
+
+pytest
+
+The tool that discovers and runs those tests.
+
+So:
+
+                 pytest
+                   ↓
+              runs tests
+                   ↓
+        ┌──────────┴──────────┐
+        ↓                     ↓
+   test_add()            test_update()
+        ↓                     ↓
+      assert                 assert
+
