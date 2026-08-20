@@ -711,3 +711,54 @@ So:
         ↓                     ↓
       assert                 assert
 
+
+
+### A test file imports the code it wants to test from the application module.
+Running pytest starts pytest's test-discovery and test-execution process.
+                    pytest
+                      │
+                      ▼
+              finds test file
+                      │
+                      ▼
+             finds test function
+                      │
+                      ▼
+              runs test function
+                      │
+                      ▼
+             calls application code
+                      │
+                      ▼
+                gets a result
+                      │
+                      ▼
+                 assert checks
+                      │
+              ┌───────┴───────┐
+              ▼               ▼
+            True            False
+              │               │
+              ▼               ▼
+           PASS ✅          FAIL ❌
+
+
+A specification is a description of what something is supposed to do.
+Tests can be executable specifications of expected behavior.
+A good test input is an input chosen to meaningfully check the behavior we care about.
+### An edge case is a situation near an unusual or boundary condition that can reveal problems in software.
+
+
+#### . Testing is about expected behavior
+
+### What is a normal case?
+A normal case is a test using input that represents ordinary, expected usage of the software.
+Nothing unusual.
+
+Nothing at the boundary.
+
+Nothing intentionally invalid.
+
+Just:
+
+"What does a normal user typically do?"
