@@ -55,3 +55,31 @@
             │
             ▼
        Production System
+
+
+
+
+
+                    ┌──────────────────────┐
+                    │     Interfaces       │
+                    │                      │
+                    │ CLI / REST API / ... │
+                    └──────────┬───────────┘
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │      Services        │
+                    │                      │
+                    │  Business Logic      │
+                    └──────────┬───────────┘
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │    Repositories      │
+                    │                      │
+                    │ Persistence Contract │
+                    └──────────┬───────────┘
+                               │
+                     ┌─────────┴─────────┐
+                     ▼                   ▼
+               SQL Database       Other Storage
