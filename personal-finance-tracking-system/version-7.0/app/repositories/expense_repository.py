@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from app.models.expense import Expense
 
 
 class ExpenseRepository(ABC):
@@ -8,11 +9,11 @@ class ExpenseRepository(ABC):
         pass
 
     @abstractmethod
-    def get_all(self):
+    def get_all(self) -> list[Expense]:
         pass
 
     @abstractmethod
-    def find_by_id(self, expense_id):
+    def find_by_id(self, expense_id) -> Expense | None:
         pass
 
     @abstractmethod

@@ -1,6 +1,6 @@
 from app.repositories.expense_repository import ExpenseRepository
-from app.storage.sqlite_storage import SqliteStorage
 from app.models.expense import Expense
+from app.storage.sqlite_storage import SqliteStorage
 
 
 class SqliteExpenseRepository(ExpenseRepository):
