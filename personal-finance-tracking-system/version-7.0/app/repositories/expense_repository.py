@@ -23,4 +23,3 @@ class ExpenseRepository(ABC):
     def delete(self, expense):
         pass
 
-  

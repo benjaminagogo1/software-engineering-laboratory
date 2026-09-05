@@ -1,3 +1,4 @@
+from config import setup_logging
 import config
 from app.repositories.sqlite_expense_repository import SqliteExpenseRepository
 from app.services.expense_service import ExpenseService
@@ -8,6 +9,12 @@ from app.ui.menus import (
     update_expense_menu,
     delete_expense_menu,
 )
+
+
+
+logger = setup_logging()
+logger.info("Application started")
+
 
 
 def main():
