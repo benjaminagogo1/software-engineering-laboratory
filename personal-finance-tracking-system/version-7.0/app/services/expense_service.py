@@ -1,7 +1,11 @@
 from app.services.results import UpdateResult
 from app.services.results import AddResult
+
 from app.services.results import DeleteResult
 from app.repositories.expense_repository import ExpenseRepository
+import logging
+
+logger = logging.getLogger(__name__)
 
 class ExpenseService:
 
@@ -16,6 +20,7 @@ class ExpenseService:
             return AddResult.INVALID_AMOUNT
 
         self.repository.add(expense)
+        logger.debug("Expense added successfully: id=%s,", expense.id)
 
         return AddResult.SUCCESS
     
@@ -33,6 +38,8 @@ class ExpenseService:
 
         self.repository.delete(expense)
 
+        logger.info("Expense deleted successfully: id=%s", expense.id)
+
         return DeleteResult.SUCCESS
     
 
@@ -47,5 +54,7 @@ class ExpenseService:
 
         expense.amount = amount
         self.repository.update(expense)
+
+        logger.info("Expense updated successfully: id=%s", expense.id)
 
         return UpdateResult.SUCCESS

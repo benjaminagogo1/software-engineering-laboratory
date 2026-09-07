@@ -15,14 +15,15 @@ import logging
 LOG_FILE = "logs/app.log"
 
 def setup_logging():
-      log_file = LOG_FILE
-      handler = logging.FileHandler(log_file)
+      handler = logging.FileHandler(LOG_FILE)
 
       formatter = logging.Formatter(
             "%(asctime)s | %(levelname)s | %(message)s"
       )
       handler.setFormatter(formatter)
-      logger = logging.getLogger(__name__)
-      logger.addHandler(handler)
-      logger.setLevel(logging.INFO)
-      return logger
+      logger = logging.getLogger()
+      logger.setLevel(logging.DEBUG)
+      if not logger.handlers:
+            logger.addHandler(handler)
+      
+      return logger 

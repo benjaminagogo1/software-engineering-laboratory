@@ -1,6 +1,10 @@
 import sqlite3
 from app.storage.storage_error import StorageError
+import logging
 
+
+
+logger = logging.getLogger(__name__)
 
 class SqliteStorage:
     """
@@ -17,7 +21,10 @@ class SqliteStorage:
         try:
             return sqlite3.connect(self.db_path)
         except sqlite3.Error as error:
-            raise StorageError("Unable to connect to the expense database") from error
+            logger.exception("Unable to connect to the expense database")
+            raise StorageError(
+                "Unable to connect to the expense database"
+                ) from error
 
     def _create_table_if_missing(self):
         connection = self._connect()
@@ -74,7 +81,10 @@ class SqliteStorage:
             connection.commit()
             return cursor.lastrowid
         except sqlite3.Error as error:
-            raise StorageError("Unable to save the expense to the database") from error
+            logger.exception("Unable to save expense")
+            raise StorageError(
+                "Unable to save the expense to the database"
+                ) from error
         finally:
             connection.close()
 

@@ -13,7 +13,7 @@ from app.ui.menus import (
 
 
 logger = setup_logging()
-logger.info("Application started")
+logger.debug("Application started")
 
 
 
@@ -22,7 +22,7 @@ def main():
     service = ExpenseService(repository)
 
     while True:
-        print("\nExpense Tracker")
+        print("\nExpense Tracker") 
         print("1. Add Expense")
         print("2. Show Expenses")
         print("3. Update Expense")
