@@ -20,7 +20,7 @@ class ExpenseService:
             return AddResult.INVALID_AMOUNT
 
         self.repository.add(expense)
-        logger.debug("Expense added successfully: id=%s,", expense.id)
+        logger.info("Expense added successfully: id=%s,", expense.id)
 
         return AddResult.SUCCESS
     

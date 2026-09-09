@@ -25,7 +25,9 @@ Expense #1
 
 
 
+### That is the real problem logging solves:
 
+It gives us a persistent, useful history of important events inside a running system, especially when nobody is watching the program at the moment something happens.
 
 
 

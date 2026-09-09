@@ -13,7 +13,7 @@ from app.ui.menus import (
 
 
 logger = setup_logging()
-logger.debug("Application started")
+logger.debug("debug logging is working")
 
 
 
