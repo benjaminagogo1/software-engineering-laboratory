@@ -13,7 +13,7 @@ load_dotenv()
 # otherwise falls back to the default. This means the app runs fine
 # even if someone forgets to create a .env file.
 DB_PATH = os.getenv("DB_PATH", "data/expense.db")
-LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
+LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO").strip().upper()
 
 
 BASE_DIR = Path(__file__).resolve().parent
