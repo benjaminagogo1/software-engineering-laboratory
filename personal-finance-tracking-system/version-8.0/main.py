@@ -19,7 +19,9 @@ logger.info("Application started")
 
 def main():
     repository = SqliteExpenseRepository(config.DB_PATH)
+
     service = ExpenseService(repository)
+
 
     while True:
         print("\nExpense Tracker") 
