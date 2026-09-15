@@ -1,6 +1,6 @@
 from app.services.expense_service import ExpenseService
 from app.repositories.expense_repository import ExpenseRepository
-from app.services.results import AddResult
+from app.services.results import AddResult, DeleteResult
 
 from app.models.expense import Expense
 
@@ -10,6 +10,7 @@ class FakeRepository(ExpenseRepository):
       def __init__(self):
             self.add_expense = None
             self.expenses = []
+            self.delete_expense = None
 
 
       def add(self, expense):
@@ -22,7 +23,7 @@ class FakeRepository(ExpenseRepository):
 
       def find_by_id(self, expense_id) -> Expense | None:
             for expense in self.expenses:
-                  if expense_id == expense_id:
+                  if expense.id == expense_id:
                         return expense
                   
             return None
@@ -32,7 +33,7 @@ class FakeRepository(ExpenseRepository):
             pass
       
       def delete(self, expense):
-            pass
+            self.delete_expense = expense
 
 
 def test_add_expense_invalid_name():
@@ -105,3 +106,30 @@ def test_get_expense_by_id_found():
       result = service.get_expense_by_id(expense.id)
 
       assert result == expense
+
+
+
+
+
+def test_delete_expense_not_found():
+      repository = FakeRepository()
+      service = ExpenseService(repository)
+
+      result = service.delete_expense_by_id(999)
+
+      assert result == DeleteResult.NOT_FOUND
+      assert repository.delete_expense is None
+
+
+
+def test_delete_expense():
+      repository = FakeRepository()
+      service = ExpenseService(repository)
+
+      expense = Expense(1, "Food", 1000)
+
+      repository.add(expense)
+
+      result = service.delete_expense_by_id(1)
+      assert result == DeleteResult.SUCCESS
+      assert repository.delete_expense == expense
