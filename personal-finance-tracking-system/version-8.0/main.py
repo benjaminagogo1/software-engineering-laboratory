@@ -1,7 +1,9 @@
 from config import setup_logging
+import sys
 import config
 from app.repositories.sqlite_expense_repository import SqliteExpenseRepository
 from app.services.expense_service import ExpenseService
+from cli.commands import run
 
 from app.ui.menus import (
     add_expense_menu,
@@ -21,6 +23,11 @@ def main():
     repository = SqliteExpenseRepository(config.DB_PATH)
 
     service = ExpenseService(repository)
+
+    if len(sys.argv) > 1:
+        run(service)
+        return
+
 
 
     while True:
