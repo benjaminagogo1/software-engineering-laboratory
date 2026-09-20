@@ -444,3 +444,41 @@ Uvicorn
 
 FastAPI
 → a web framework that provides an ASGI application
+
+
+What is Swagger UI?
+
+Swagger UI is a web interface for exploring and testing an API.
+
+
+OpenAPI is the standardized description of your API.
+
+Swagger UI is the visual interface that uses that description.
+
+
+## Next step
+
+- Authentication
+- Authorization
+- Database migrations
+- Configuration management
+- Environment separation
+- API security
+- Automated API testing
+- Deployment
+- External services
+- Concurrency
+- Transactions
+- Caching
+- Background tasks
+- Monitoring
+- CI/CD
+
+
+
+Request models define the contract for data coming into the API. Response models define the contract for data leaving the API.
+
+
+What is TestClient?
+
+TestClient is a testing tool provided through FastAPI's testing support.

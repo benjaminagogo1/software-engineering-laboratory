@@ -44,7 +44,7 @@ class ExpenseService:
     
 
     def update_expense(self, expense_id, amount):
-        if amount <= 0:
+        if amount <= 0.0:
             return UpdateResult.INVALID_AMOUNT
 
         expense = self.repository.find_by_id(expense_id)
