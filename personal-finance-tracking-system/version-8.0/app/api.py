@@ -2,15 +2,32 @@ from app.services.expense_service import ExpenseService
 from app.repositories.sqlite_expense_repository import SqliteExpenseRepository
 from app.models.expense import Expense
 import config
+from fastapi.security import HTTPBearer
 from fastapi import Depends
+from app.auth.jwt  import verify_access_token
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from app.services.results import UpdateResult, AddResult, DeleteResult
 
 
+security =  HTTPBearer()
+
 
 repository = SqliteExpenseRepository(config.DB_PATH)
 service = ExpenseService(repository)
+
+
+def get_current_user(credentials = Depends(security)):
+      token = credentials.credentials
+      payload = verify_access_token(token)
+
+      if payload is None:
+            raise HTTPException(
+                  status_code =401,
+                  detail = "Invalid or expiired token"
+            )
+      return payload
+
 
 
 def get_service():
@@ -42,7 +59,11 @@ app = FastAPI()
 
 
 @app.get("/expenses", response_model=list[ExpenseResponse])
-def get_expenses(service= Depends(get_service)):
+def get_expenses(
+      service= Depends(get_service),
+      current_user= Depends(get_current_user)
+      ):
+      
       return service.get_all_expenses()
 
 

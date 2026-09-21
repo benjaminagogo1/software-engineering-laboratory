@@ -485,3 +485,65 @@ TestClient is a testing tool provided through FastAPI's testing support.
 
 ## check the commit date 
 git log -1 --format=fuller
+
+
+## JWT 
+1. What is a JWT? JWT (JSON Web Token)
+
+A JWT is a signed piece of information that an API can use to identify and trust a user.
+
+The server creates the JWT after successful authentication, and the client sends it back with later requests.
+
+
+
+## Approach	Basic idea
+Session-based authentication	Server creates a session and remembers the logged-in user
+API Key authentication	Client sends a secret API key with requests
+Bearer Token authentication	Client sends a token with each request
+JWT (JSON Web Token)	A structured, signed bearer token containing information/claims
+OAuth 2.0	Allows delegated access to resources without sharing a user's password
+OpenID Connect (OIDC)	Adds user identity/authentication on top of OAuth 2.0
+Basic Authentication	Client sends username + password with each request
+Mutual TLS (mTLS)	Client and server authenticate using digital certificates
+Cookie-based authentication	Authentication information is carried in an HTTP cookie, commonly with sessions
+Passwordless authentication	User authenticates through magic links, passkeys, one-time codes, etc.
+
+
+
+
+
+
+HttpOnly → JavaScript can't directly read cookie
+
+Secure   → Cookie only travels over HTTPS
+
+SameSite → Controls cross-site cookie sending
+
+
+## login → token issuance → requests → expiration → refresh → logout/revocation
+
+
+JWT Secret Key
+
+Before our API can create or verify JWTs, it needs a secret key.
+
+Think of it as a private cryptographic key known only to our server:
+
+## Command to Generate secrete key
+openssl rand -hex 32
+
+HS256 means HMAC (Hash-based Message Authentication Code) using SHA-256 (Secure Hash Algorithm 256-bit).
+
+## What HTTPBearer() does
+
+It tells FastAPI:
+
+“I expect the client to send a Bearer token in the Authorization header.”
+
+## What is HTTPBearer()?
+
+HTTPBearer is a FastAPI security helper.
+
+Its job is very simple:
+
+Look at an incoming HTTP request and extract a Bearer token from its Authorization header.

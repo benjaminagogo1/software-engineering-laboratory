@@ -14,6 +14,7 @@ load_dotenv()
 # even if someone forgets to create a .env file.
 DB_PATH = os.getenv("DB_PATH", "data/expense.db")
 LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO").strip().upper()
+JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY")
 
 
 BASE_DIR = Path(__file__).resolve().parent
