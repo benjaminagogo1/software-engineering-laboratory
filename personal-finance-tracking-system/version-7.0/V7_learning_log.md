@@ -547,3 +547,33 @@ HTTPBearer is a FastAPI security helper.
 Its job is very simple:
 
 Look at an incoming HTTP request and extract a Bearer token from its Authorization header.
+
+
+##  What is a database migration?
+
+A database migration is a controlled change to an existing database's structure while preserving its existing data.
+
+## Foreign key
+
+A foreign key is a column whose value refers to the primary key of another table.
+
+# We'll learn password hashing separately.
+
+
+
+
+1. What is a column?
+
+A column is a type of information stored for every record in a database table.
+
+For example, your current expenses table:
+
+id	      name	        amount
+1	        Transport	      1500
+2	        Food	          3000
+
+Here:
+
+id → column
+name → column
+amount → column
