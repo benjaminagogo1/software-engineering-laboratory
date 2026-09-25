@@ -17,7 +17,7 @@ class SqliteStorage:
         self.db_path = db_path
         self._create_table_if_missing()
 
-    def _connect(self):
+    def _connect(self): 
         try:
             return sqlite3.connect(self.db_path)
         except sqlite3.Error as error:
