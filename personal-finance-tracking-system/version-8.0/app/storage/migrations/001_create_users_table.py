@@ -1,4 +1,3 @@
-import sqlite3
 
 def run(connection):
       connection.execute(
