@@ -16,21 +16,21 @@ class SqliteExpenseRepository(ExpenseRepository):
     def __init__(self, db_path):
         self.storage = SqliteStorage(db_path)
 
-    def get_all(self):
-        rows = self.storage.fetch_all()
-        return [Expense(row[0], row[1], row[2]) for row in rows]
+    def get_all(self, user_id):
+        rows = self.storage.fetch_all(user_id)
+        return [Expense(row[0], row[1], row[2], row[3]) for row in rows]
 
     def add(self, expense):
-        new_id = self.storage.insert(expense.name, expense.amount)
+        new_id = self.storage.insert(expense.name, expense.amount, expense.user_id)
         expense.id = new_id
 
-    def find_by_id(self, expense_id):
-        row = self.storage.fetch_by_id(expense_id)
+    def find_by_id(self, expense_id, user_id):
+        row = self.storage.fetch_by_id(expense_id, user_id)
 
         if row is None:
             return None
 
-        return Expense(row[0], row[1], row[2])
+        return Expense(row[0], row[1], row[2], row[3])
 
     def update(self, expense):
         self.storage.update(expense.id, expense.name, expense.amount)

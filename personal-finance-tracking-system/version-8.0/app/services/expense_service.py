@@ -24,14 +24,14 @@ class ExpenseService:
 
         return AddResult.SUCCESS
     
-    def get_all_expenses(self):
-        return self.repository.get_all()
+    def get_all_expenses(self, user_id):
+        return self.repository.get_all(user_id)
 
-    def get_expense_by_id(self, expense_id):
-        return self.repository.find_by_id(expense_id)
+    def get_expense_by_id(self, expense_id, user_id):
+        return self.repository.find_by_id(expense_id, user_id)
     
-    def delete_expense_by_id(self, expense_id):
-        expense = self.repository.find_by_id(expense_id)
+    def delete_expense_by_id(self, expense_id, user_id):
+        expense = self.repository.find_by_id(expense_id, user_id)
 
         if expense is None:
             return DeleteResult.NOT_FOUND
@@ -43,11 +43,11 @@ class ExpenseService:
         return DeleteResult.SUCCESS
     
 
-    def update_expense(self, expense_id, amount):
+    def update_expense(self, expense_id, amount, user_id):
         if amount <= 0.0:
             return UpdateResult.INVALID_AMOUNT
 
-        expense = self.repository.find_by_id(expense_id)
+        expense = self.repository.find_by_id(expense_id, user_id)
 
         if expense is None:
             return UpdateResult.NOT_FOUND

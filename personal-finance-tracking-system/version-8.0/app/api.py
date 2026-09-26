@@ -36,6 +36,7 @@ def get_service():
 class ExpenseRequest(BaseModel):
       name: str
       amount: float
+     
 
 
 class ExpenseUpdatedRequest(BaseModel):
@@ -64,15 +65,20 @@ def get_expenses(
       current_user= Depends(get_current_user)
       ):
       
-      return service.get_all_expenses()
-
+      return service.get_all_expenses(current_user["user_id"])
 
 @app.post("/expenses", response_model=CreateExpenseResponse, status_code=201)
-def create_expense(expense_request: ExpenseRequest, service = Depends(get_service)):
+def create_expense(
+      expense_request: ExpenseRequest, 
+      service = Depends(get_service),
+      current_user = Depends(get_current_user)
+      ):
+      
       expense = Expense(
             None,
             expense_request.name,
-            expense_request.amount
+            expense_request.amount,
+            current_user["user_id"]
       )
       
 
@@ -91,8 +97,14 @@ def create_expense(expense_request: ExpenseRequest, service = Depends(get_servic
 
 
 @app.get("/expenses/{expense_id}", response_model=ExpenseResponse)
-def get_expense(expense_id: int, service = Depends(get_service)):
-      expense = service.get_expense_by_id(expense_id)
+def get_expense(expense_id: int, 
+      service = Depends(get_service),
+      current_user = Depends(get_current_user)
+      ):
+      expense = service.get_expense_by_id(
+            expense_id,
+            current_user["user_id"]
+            )
 
       if expense is None:
             raise HTTPException(status_code=404, detail= "Expense not found.")
@@ -101,27 +113,42 @@ def get_expense(expense_id: int, service = Depends(get_service)):
 
 
 @app.put("/expenses/{expense_id}", response_model=MessageResponse)
-def update_expense(expense_id: int, expense_request: ExpenseUpdatedRequest, service= Depends(get_service)):
+def update_expense(
+    expense_id: int,
+    expense_request: ExpenseUpdatedRequest,
+    service=Depends(get_service),
+    current_user=Depends(get_current_user)
+):
+    result = service.update_expense(
+        expense_id,
+        expense_request.amount,
+        current_user["user_id"]
+    )
 
-      result = service.update_expense(expense_id, expense_request.amount)
+    if result == UpdateResult.NOT_FOUND:
+        raise HTTPException(status_code=404, detail="Expense not found")
 
-      if result == UpdateResult.NOT_FOUND:
-            raise HTTPException(status_code=404, detail="Expense not found")
-      
-      if result == UpdateResult.INVALID_AMOUNT:
-            raise HTTPException(status_code=400, detail="Amount must be greater than zero")
-      return {"message": "Expense updated successfully"}
+    if result == UpdateResult.INVALID_AMOUNT:
+        raise HTTPException(
+            status_code=400,
+            detail="Amount must be greater than zero"
+        )
 
+    return {"message": "Expense updated successfully"}
 
 @app.delete("/expenses/{expense_id}", response_model=MessageResponse)
-def delete_expense(expense_id: int, service= Depends(get_service)):
-      result = service.delete_expense_by_id(expense_id)
-      if result == DeleteResult.NOT_FOUND:
-            raise HTTPException(status_code=404, detail="Expense not found")
-          
-           
-      return {"message": "Expense deleted successfully"}
+def delete_expense(
+    expense_id: int,
+    service=Depends(get_service),
+    current_user=Depends(get_current_user)
+):
+    result = service.delete_expense_by_id(
+        expense_id,
+        current_user["user_id"]
+    )
 
+    if result == DeleteResult.NOT_FOUND:
+        raise HTTPException(status_code=404, detail="Expense not found")
 
-
+    return {"message": "Expense deleted successfully"}
 

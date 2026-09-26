@@ -9,11 +9,11 @@ class ExpenseRepository(ABC):
         pass
 
     @abstractmethod
-    def get_all(self) -> list[Expense]:
+    def get_all(self, user_id) -> list[Expense]:
         pass
 
     @abstractmethod
-    def find_by_id(self, expense_id) -> Expense | None:
+    def find_by_id(self, expense_id, user_id) -> Expense | None:
         pass
 
     @abstractmethod

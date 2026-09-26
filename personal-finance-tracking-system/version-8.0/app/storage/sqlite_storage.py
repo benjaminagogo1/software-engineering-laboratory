@@ -1,4 +1,5 @@
 import sqlite3
+from app.storage.migration_runner import run_migrations
 from app.storage.storage_error import StorageError
 import logging
 
@@ -15,68 +16,82 @@ class SqliteStorage:
 
     def __init__(self, db_path):
         self.db_path = db_path
-        self._create_table_if_missing()
+
+        connection =  self._connect()
+
+        try:
+            run_migrations(connection)
+        finally:
+            connection.close()
 
     def _connect(self): 
         try:
-            return sqlite3.connect(self.db_path)
+            connection = sqlite3.connect(self.db_path)
+            connection.execute("PRAGMA foreign_keys = ON")
+            return connection
         except sqlite3.Error as error:
             logger.exception("Unable to connect to the expense database")
             raise StorageError(
                 "Unable to connect to the expense database"
                 ) from error
 
-    def _create_table_if_missing(self):
+    # def _create_table_if_missing(self):
+    #     connection = self._connect()
+
+    #     try:
+    #         connection.execute(
+    #             """
+    #             CREATE TABLE IF NOT EXISTS expenses (
+    #                 id     INTEGER PRIMARY KEY AUTOINCREMENT,
+    #                 name   TEXT NOT NULL,
+    #                 amount REAL NOT NULL
+    #             )
+    #             """
+    #         )
+    #         connection.commit()
+    #     except sqlite3.Error as error:
+    #         raise StorageError("Unable to set up the expense database") from error
+    #     finally:
+    #         connection.close()
+
+    def fetch_all(self, user_id):
         connection = self._connect()
 
         try:
-            connection.execute(
-                """
-                CREATE TABLE IF NOT EXISTS expenses (
-                    id     INTEGER PRIMARY KEY AUTOINCREMENT,
-                    name   TEXT NOT NULL,
-                    amount REAL NOT NULL
-                )
-                """
-            )
-            connection.commit()
-        except sqlite3.Error as error:
-            raise StorageError("Unable to set up the expense database") from error
-        finally:
-            connection.close()
-
-    def fetch_all(self):
-        connection = self._connect()
-
-        try:
-            cursor = connection.execute("SELECT id, name, amount FROM expenses")
+            cursor = connection.execute(
+                "SELECT id, name, amount, user_id FROM expenses WHERE user_id = ?",
+                (user_id,))
             return cursor.fetchall()
         except sqlite3.Error as error:
             raise StorageError("Unable to read expenses from the database") from error
         finally:
             connection.close()
 
-    def fetch_by_id(self, expense_id):
+    def fetch_by_id(self, expense_id, user_id):
         connection = self._connect()
 
         try:
             cursor = connection.execute(
-                "SELECT id, name, amount FROM expenses WHERE id = ?",
-                (expense_id,),
+                """
+                SELECT id, name, amount, user_id 
+                FROM expenses WHERE id = ? AND user_id = ?
+                """,
+                (expense_id, user_id),
             )
             return cursor.fetchone()
+        
         except sqlite3.Error as error:
             raise StorageError("Unable to read the expense from the database") from error
         finally:
             connection.close()
 
-    def insert(self, name, amount):
+    def insert(self, name, amount, user_id):
         connection = self._connect()
 
         try:
             cursor = connection.execute(
-                "INSERT INTO expenses (name, amount) VALUES (?, ?)",
-                (name, amount),
+                "INSERT INTO expenses (name, amount, user_id) VALUES (?, ?, ?)",
+                (name, amount, user_id),
             )
             connection.commit()
             return cursor.lastrowid
@@ -84,7 +99,7 @@ class SqliteStorage:
             logger.exception("Unable to save expense")
             raise StorageError(
                 "Unable to save the expense to the database"
-                ) from error
+            ) from error
         finally:
             connection.close()
 
