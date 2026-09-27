@@ -577,3 +577,12 @@ Here:
 id → column
 name → column
 amount → column
+
+
+A hash is not encryption.
+
+Encryption is designed so that data can later be decrypted back to the original.
+
+Password hashing is designed to be one-way: we don't need to recover the original password.
+
+Argon2's Python package now. The package we want is argon2-cffi (cffi means C Foreign Function Interface).

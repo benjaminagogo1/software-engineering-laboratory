@@ -136,6 +136,7 @@ def update_expense(
 
     return {"message": "Expense updated successfully"}
 
+
 @app.delete("/expenses/{expense_id}", response_model=MessageResponse)
 def delete_expense(
     expense_id: int,

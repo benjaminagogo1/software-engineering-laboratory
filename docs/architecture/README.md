@@ -831,3 +831,72 @@ personal-finance-tracking-system/
 └── CONTRIBUTING.md
 
 This is no longer a learning project—it's a production application.
+
+
+
+
+
+## Build real user authentication
+
+Right now, our expense ownership system works, but there is still a gap:
+
+User
+  ↓
+??? How does the user actually create an account?
+  ↓
+Login
+  ↓
+JWT access token
+  ↓
+Expense API
+  ↓
+user_id
+  ↓
+User's expenses
+
+At the moment, we have been manually creating a user in SQLite and manually generating a JWT for testing. That's useful for development, but it isn't a complete authentication system.
+
+So I suggest V12:
+
+User Registration + Login
+
+We would build it in a controlled sequence:
+
+Password hashing
+Understand why we never store a user's actual password.
+Choose and implement a proper password-hashing approach.
+User registration
+POST /users/register
+username
+password
+store the hashed password
+User login
+POST /users/login
+verify username + password
+create JWT containing user_id
+Connect login to the existing expense API
+No more manually creating JWTs.
+A real user logs in and receives their token.
+
+Test the complete flow
+
+Register
+   ↓
+Login
+   ↓
+Receive JWT
+   ↓
+Create expense
+   ↓
+JWT identifies user
+   ↓
+Expense belongs to that user
+Why I think this should come next
+
+Because we have already built the authorization foundation—the system knows that an expense belongs to a particular user.
+
+What we're missing is the authentication entry point—the system needs to know who the user actually is.
+
+So rather than adding another feature on top of an incomplete authentication flow, I would make V12 = Real User Authentication.
+
+And, following how we've been learning, I would start V12 with one concept only: password hashing. We should understand that before writing the registration endpoint
