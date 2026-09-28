@@ -8,6 +8,9 @@ from app.auth.jwt  import verify_access_token
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from app.services.results import UpdateResult, AddResult, DeleteResult
+from app.services.user_service import UserService
+from app.repositories.sqlite_user_repository import SqliteUserRepository
+from app.schemas.user import UserRegistration
 
 
 security =  HTTPBearer()
@@ -15,6 +18,10 @@ security =  HTTPBearer()
 
 repository = SqliteExpenseRepository(config.DB_PATH)
 service = ExpenseService(repository)
+
+
+user_repository = SqliteUserRepository(config.DB_PATH)
+user_service = UserService(user_repository)
 
 
 def get_current_user(credentials = Depends(security)):
@@ -38,6 +45,10 @@ class ExpenseRequest(BaseModel):
       amount: float
      
 
+
+class UserResponse(BaseModel):
+      id: int
+      username: str
 
 class ExpenseUpdatedRequest(BaseModel):
       amount: float
@@ -66,6 +77,28 @@ def get_expenses(
       ):
       
       return service.get_all_expenses(current_user["user_id"])
+
+
+@app.post("/register", response_model=UserResponse, status_code=201)
+def register_user(user_request: UserRegistration):
+      user = user_service.register_user(
+            user_request.username,
+            user_request.password
+      )
+
+      if user is None:
+            raise HTTPException(
+                  status_code=409,
+                  detail="Username already exists"
+            )
+
+      return {
+            "id": user.id,
+            "username": user.username
+      }
+
+
+
 
 @app.post("/expenses", response_model=CreateExpenseResponse, status_code=201)
 def create_expense(
