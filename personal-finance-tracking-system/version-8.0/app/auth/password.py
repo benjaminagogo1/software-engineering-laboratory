@@ -4,8 +4,8 @@ from argon2.exceptions import VerifyMismatchError, InvalidHashError
 
 password_hasher = PasswordHasher()
 
-def hash_password(hashed):
-      return password_hasher.hash(hashed)
+def hash_password(password):
+      return password_hasher.hash(password)
 
 
 

@@ -61,3 +61,8 @@ def test_create_expense():
       expense =  response.json()["expense"]
       assert expense["name"] == "Test Food"
       assert expense["amount"] == 2500
+
+
+
+
+      

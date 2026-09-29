@@ -2,6 +2,7 @@ from app.services.expense_service import ExpenseService
 from app.repositories.sqlite_expense_repository import SqliteExpenseRepository
 from app.models.expense import Expense
 import config
+from app.schemas.user import UserRegistration, UserLogin
 from fastapi.security import HTTPBearer
 from fastapi import Depends
 from app.auth.jwt  import verify_access_token
@@ -10,7 +11,7 @@ from pydantic import BaseModel
 from app.services.results import UpdateResult, AddResult, DeleteResult
 from app.services.user_service import UserService
 from app.repositories.sqlite_user_repository import SqliteUserRepository
-from app.schemas.user import UserRegistration
+
 
 
 security =  HTTPBearer()
@@ -31,7 +32,7 @@ def get_current_user(credentials = Depends(security)):
       if payload is None:
             raise HTTPException(
                   status_code =401,
-                  detail = "Invalid or expiired token"
+                  detail = "Invalid or expired token"
             )
       return payload
 
@@ -44,6 +45,10 @@ class ExpenseRequest(BaseModel):
       name: str
       amount: float
      
+
+class LoginResponse(BaseModel):
+    access_token: str
+    token_type: str
 
 
 class UserResponse(BaseModel):
@@ -97,6 +102,24 @@ def register_user(user_request: UserRegistration):
             "username": user.username
       }
 
+
+@app.post("/login", response_model=LoginResponse)
+def login_user(user_request: UserLogin):
+      token = user_service.login_user(
+            user_request.username,
+            user_request.password
+      )
+
+      if token is None:
+            raise HTTPException(
+                  status_code=401,
+                  detail="Invalid username or password"
+            )
+
+      return {
+            "access_token": token,
+            "token_type": "bearer"
+      }
 
 
 
