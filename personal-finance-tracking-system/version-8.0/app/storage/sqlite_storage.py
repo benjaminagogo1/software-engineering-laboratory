@@ -103,6 +103,41 @@ class SqliteStorage:
         finally:
             connection.close()
 
+
+    def insert_user(self, username, password_hash):
+        connection = self._connect()
+
+        try:
+            cursor = connection.execute(
+                """
+                INSERT INTO users (username, password_hash)
+                VALUES (?, ?)
+                """,
+                (username, password_hash),
+            )
+            connection.commit()
+            return cursor.lastrowid
+        except sqlite3.Error as error:
+            logger.exception("Unable to save user")
+            raise StorageError(
+                "Unable to save the user to the database"
+            ) from error
+        finally:
+            connection.close()
+
+
+    def fetch_user_by_username(self, username):
+        with self._connect() as connection:
+            cursor = connection.execute(
+                """
+                SELECT id, username, password_hash
+                FROM users
+                WHERE username = ?
+                """,
+                (username,)
+        )
+        return cursor.fetchone()
+
     def update(self, expense_id, name, amount):
         connection = self._connect()
 
