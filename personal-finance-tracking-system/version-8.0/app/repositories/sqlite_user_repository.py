@@ -21,3 +21,11 @@ class SqliteUserRepository(UserRepository):
             return None
 
         return User(row[0], row[1], row[2])
+
+    def find_by_id(self, user_id):
+        row = self.storage.fetch_user_by_id(user_id)
+
+        if row is None:
+            return None
+
+        return User(row[0], row[1], row[2])

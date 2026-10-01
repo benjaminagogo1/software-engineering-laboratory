@@ -1,0 +1,100 @@
+/*
+ * The client's design tokens.
+ *
+ * These are deliberately the same values the server-side spending chart uses
+ * (app/reports/monthly_chart.py): that renderer is injected into this page, and
+ * a chart that brought its own palette would sit beside the interface rather
+ * than in it. Change one, change both.
+ *
+ * Dark mode is selected, not derived — the dark values are their own steps
+ * against the dark surface, because an automatic inversion produces dull,
+ * muddy colors and fails contrast.
+ */
+
+:root {
+  color-scheme: light dark;
+
+  /* Surfaces and ink */
+  --surface-1: #fcfcfb;
+  --page: #f9f9f7;
+  --text-primary: #0b0b0b;
+  --text-secondary: #52514e;
+  --text-muted: #898781;
+  --border: rgba(11, 11, 11, 0.1);
+  --gridline: #e1e0d9;
+  --baseline: #c3c2b7;
+
+  /* The single data hue. A second series would take --series-2, assigned in
+     fixed order and never cycled. */
+  --series-1: #2a78d6;
+
+  /* Reserved status colors: never reused as a series color, and never the only
+     thing carrying the meaning — a destructive control is also labelled. */
+  --danger: #b3261e;
+  --danger-surface: #fdf3f2;
+  --danger-border: rgba(179, 38, 30, 0.28);
+  --success: #1f6f43;
+
+  /* Type */
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace;
+
+  /* Space */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+
+  /* Shape */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  --shadow-1: 0 1px 2px rgba(11, 11, 11, 0.06), 0 4px 12px rgba(11, 11, 11, 0.04);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme='light'])) {
+    --surface-1: #1a1a19;
+    --page: #0d0d0d;
+    --text-primary: #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted: #898781;
+    --border: rgba(255, 255, 255, 0.12);
+    --gridline: #2c2c2a;
+    --baseline: #383835;
+
+    /* The dark step of the same hue, not a lightened copy of the light one. */
+    --series-1: #3987e5;
+
+    --danger: #f2857c;
+    --danger-surface: #2a1614;
+    --danger-border: rgba(242, 133, 124, 0.32);
+    --success: #7bc79b;
+
+    --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+}
+
+:root[data-theme='dark'] {
+  --surface-1: #1a1a19;
+  --page: #0d0d0d;
+  --text-primary: #ffffff;
+  --text-secondary: #c3c2b7;
+  --text-muted: #898781;
+  --border: rgba(255, 255, 255, 0.12);
+  --gridline: #2c2c2a;
+  --baseline: #383835;
+
+  --series-1: #3987e5;
+
+  --danger: #f2857c;
+  --danger-surface: #2a1614;
+  --danger-border: rgba(242, 133, 124, 0.32);
+  --success: #7bc79b;
+
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.3);
+}
